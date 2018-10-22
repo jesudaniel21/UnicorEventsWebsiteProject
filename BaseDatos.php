@@ -35,11 +35,11 @@
 			return $res;
 		}
 		
-		public function single_record($id){
-			$sql = "SELECT * FROM eventos where id='$id'";
+		public function single_record($IdEvento){
+			$sql = "SELECT * FROM eventos where IdEvento='$IdEvento'";
 			$res = mysqli_query($this->con, $sql);
-			$return = mysqli_fetch_object($res );
-			return $return ;
+			$return = mysqli_fetch_object($res);
+			return $return;
 		}
 		public function update($NombreE,$CostoEestudiante,$CostoEparticular,$FechaEinicio,$FechaEfinal,$HoraEinicio,$HoraEfinal,$ResponsableE,$OrganizadoresE,$DescripcionE,$IdEvento){
 			$sql = "UPDATE eventos SET NombreE='$NombreE', CostoEestudiante='$CostoEestudiante', CostoEparticular='$CostoEparticular', FechaEinicio='$FechaEinicio', FechaEfinal='$FechaEfinal', HoraEinicio='$HoraEinicio', HoraEfinal='$HoraEfinal', ResponsableE='$ResponsableE', OrganizadoresE='$OrganizadoresE', DescripcionE='$DescripcionE' WHERE IdEvento=$IdEvento";
@@ -51,7 +51,7 @@
 			}
 		}
 		public function delete($id){
-			$sql = "DELETE FROM eventos WHERE id=$id";
+			$sql = "DELETE FROM eventos WHERE IdEvento=$id";
 			$res = mysqli_query($this->con, $sql);
 			if($res){
 				return true;

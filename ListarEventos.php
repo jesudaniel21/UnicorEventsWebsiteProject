@@ -43,6 +43,7 @@
                     </tr>
                 </thead>
 				<?php 
+                error_reporting(E_ALL ^ E_NOTICE);
 				include ('BaseDatos.php');
 				$EventosU = new Database();
 				$listado=$EventosU->read();
@@ -77,8 +78,8 @@
 						<td><?php echo $OrganizadoresE;?></td>
                         <td><?php echo $DescripcionE;?></td>
                         <td>
-						    <a href="update.php?id=<?php echo $id;?>" class="edit" title="Editar" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a href="delete.php?id=<?php echo $id;?>" class="delete" title="Eliminar" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+						    <a href="ActualizarEvento.php?IdEvento=<?php echo $IdEvento;?>" class="edit" title="Editar" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                            <a href="EliminarEvento.php?IdEvento=<?php echo $IdEvento;?>" class="delete" title="Eliminar" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
                         </td>
                     </tr>	
 				<?php
