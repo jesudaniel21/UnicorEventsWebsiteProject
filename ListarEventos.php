@@ -10,8 +10,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="Styles/Estilo.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -30,6 +28,7 @@
                     <tr>
                         <th>ID Evento</th>
                         <th>Nombre Evento</th>
+                        <th>Cupos</th> 
                         <th>Costo Estudiantes</th>
 						<th>Costo Particulares</th>
                         <th>Fecha Inicio</th>
@@ -54,6 +53,7 @@
 
                         $IdEvento = $row->IdEvento;
                         $NombreE = $row->NombreE;
+                        $CuposE = $row->CuposE;
                         $CostoEestudiante = $row->CostoEestudiante;
                         $CostoEparticular = $row->CostoEparticular;
                         $FechaEinicio = $row->FechaEinicio;
@@ -68,6 +68,7 @@
 					<tr>
                         <td><?php echo $IdEvento;?></td>
                         <td><?php echo $NombreE;?></td>
+                        <td><?php echo $CuposE;?></td>
                         <td><?php echo $CostoEestudiante;?></td>
                         <td><?php echo $CostoEparticular;?></td>
                         <td><?php echo $FechaEinicio;?></td>

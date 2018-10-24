@@ -10,8 +10,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="Styles/Estilo.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -33,6 +31,7 @@
 
 
 					$NombreE = $EventosU->sanitize($_POST['NombreE']);
+					$CuposE = $EventosU->sanitize($_POST['CuposE']);
 					$CostoEestudiante = $EventosU->sanitize($_POST['CostoEestudiante']);
 					$CostoEparticular = $EventosU->sanitize($_POST['CostoEparticular']);
 					$FechaEinicio = $EventosU->sanitize($_POST['FechaEinicio']);
@@ -43,7 +42,7 @@
 					$OrganizadoresE = $EventosU->sanitize($_POST['OrganizadoresE']);
 					$DescripcionE = $EventosU->sanitize($_POST['DescripcionE']);
 					
-					$res = $EventosU->create($NombreE,$CostoEestudiante,$CostoEparticular,$FechaEinicio,$FechaEfinal,$HoraEinicio,$HoraEfinal,$ResponsableE,$OrganizadoresE,$DescripcionE);
+					$res = $EventosU->create($NombreE,$CuposE,$CostoEestudiante,$CostoEparticular,$FechaEinicio,$FechaEfinal,$HoraEinicio,$HoraEfinal,$ResponsableE,$OrganizadoresE,$DescripcionE);
 					if($res){
 						$message= "Evento insertado con éxito";
 						$class="alert alert-success";
@@ -64,6 +63,10 @@
 				<div class="col-md-6">
 					<label>Nombre Del Evento:</label>
 					<input type="text" name="NombreE" id="NombreE" class='form-control' maxlength="255" required >
+				</div>
+				<div class="col-md-6">
+					<label>Cupos Del Evento:</label>
+					<input type="number" name="CuposE" id="CuposE" class='form-control' required>
 				</div><br><br><br><br>
 				<div class="col-md-6">
 					<label>Costo Para Estudiantes:</label>
