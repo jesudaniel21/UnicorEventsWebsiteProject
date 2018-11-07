@@ -28,10 +28,12 @@
 				include ("BaseDatos.php");
 				$EventosU = new Database();
 				if(isset($_POST) && !empty($_POST)){
-
-
 					$NombreE = $EventosU->sanitize($_POST['NombreE']);
 					$CuposE = $EventosU->sanitize($_POST['CuposE']);
+					if(!empty($ImagenE)){
+						$ImagenE = addslashes(file_get_contents($_FILES['ImagenE']['tmp_name']));
+					}else{ $ImagenE = ""; }
+					$UrlE = $EventosU->sanitize($_POST['UrlE']);
 					$CostoEestudiante = $EventosU->sanitize($_POST['CostoEestudiante']);
 					$CostoEparticular = $EventosU->sanitize($_POST['CostoEparticular']);
 					$FechaEinicio = $EventosU->sanitize($_POST['FechaEinicio']);
@@ -42,7 +44,7 @@
 					$OrganizadoresE = $EventosU->sanitize($_POST['OrganizadoresE']);
 					$DescripcionE = $EventosU->sanitize($_POST['DescripcionE']);
 					
-					$res = $EventosU->create($NombreE,$CuposE,$CostoEestudiante,$CostoEparticular,$FechaEinicio,$FechaEfinal,$HoraEinicio,$HoraEfinal,$ResponsableE,$OrganizadoresE,$DescripcionE);
+					$res = $EventosU->create($NombreE,$CuposE,$ImagenE,$UrlE,$CostoEestudiante,$CostoEparticular,$FechaEinicio,$FechaEfinal,$HoraEinicio,$HoraEfinal,$ResponsableE,$OrganizadoresE,$DescripcionE);
 					if($res){
 						$message= "Evento insertado con éxito";
 						$class="alert alert-success";
@@ -54,62 +56,70 @@
 				<div class="<?php echo $class ?>">
 				  <?php echo $message;?>
 				</div>	
-				  <?php
+		    <?php
 				}
 	
 			?>
 			<div class="row">
-				<form method="post">
-				<div class="col-md-6">
-					<label>Nombre Del Evento:</label>
-					<input type="text" name="NombreE" id="NombreE" class='form-control' maxlength="255" required >
-				</div>
-				<div class="col-md-6">
-					<label>Cupos Del Evento:</label>
-					<input type="number" name="CuposE" id="CuposE" class='form-control' required>
-				</div><br><br><br><br>
-				<div class="col-md-6">
-					<label>Costo Para Estudiantes:</label>
-					<input type="number" name="CostoEestudiante" id="CostoEestudiante" class='form-control' step="0.001" required>
-				</div>
-				<div class="col-md-6">
-					<label>Costo Para Particulares:</label>
-					<input type="number" name="CostoEparticular" id="CostoEparticular" class='form-control' step="0.001" required>
-				</div><br><br><br><br>
-				<div class="col-md-6">
-					<label>Fecha De Inicio Del Evento:</label>
-					<input type="date" name="FechaEinicio" id="FechaEinicio" class='form-control' required>
-				</div>				
-				<div class="col-md-6">
-					<label>Fecha De Finalización Del Evento:</label>
-					<input type="date" name="FechaEfinal" id="FechaEfinal" class='form-control' required>
-				</div><br><br><br><br>
-				<div class="col-md-6">
-					<label>Hora De Inicio Del Evento:</label>
-					<input type="time" name="HoraEinicio" id="HoraEinicio" class='form-control' required>
-				</div>
-				<div class="col-md-6">
-					<label>Hora De Finalización Del Evento:</label>
-					<input type="time" name="HoraEfinal" id="HoraEfinal" class='form-control' required>
-				</div><br><br><br><br>
-				<div class="col-md-6">
-					<label>Responsable Del Evento:</label>
-					<input type="text" name="ResponsableE" id="ResponsableE" class='form-control' maxlength="60" required >
-				</div>
-				<div class="col-md-6">
-					<label>¿Quién Organiza El Evento?:</label>
-					<input type="text" name="OrganizadoresE" id="OrganizadoresE" class='form-control' maxlength="255" required >
-				</div><br><br><br>
-				<div class="col-md-12">
-					<label>Descripción Del Evento:</label>
-					<textarea  name="DescripcionE" id="DescripcionE" class='form-control' maxlength="800" required></textarea>
-				</div>
-				
-				<div class="col-md-12 pull-right">
-				<hr>
-					<button type="submit" class="btn btn-success">Guardar Evento</button>
-				</div>
-				</form>
+				<form method="POST" enctype="multipart/form-data">
+					<div class="col-md-6">
+						<label>Nombre Del Evento:</label>
+						<input type="text" name="NombreE" id="NombreE" class='form-control' maxlength="255" required>
+					</div>
+					<div class="col-md-6">
+						<label>Cupos Del Evento:</label>
+						<input type="number" name="CuposE" id="CuposE" class='form-control' required>
+					</div><br><br><br><br>
+					<div class="col-md-6">
+						<label>Inserte imagen del evento:</label>
+						<input type="file" name="ImagenE" id="ImagenE">
+					</div>
+					<div class="col-md-6">
+						<label>Inserte URL del evento:</label>
+						<input type="text" name="UrlE" id="UrlE" class='form-control'>
+					</div><br><br><br><br>
+					<div class="col-md-6">
+						<label>Costo Para Estudiantes:</label>
+						<input type="number" name="CostoEestudiante" id="CostoEestudiante" class='form-control' step="0.001" required>
+					</div>
+					<div class="col-md-6">
+						<label>Costo Para Particulares:</label>
+						<input type="number" name="CostoEparticular" id="CostoEparticular" class='form-control' step="0.001" required>
+					</div><br><br><br><br>
+					<div class="col-md-6">
+						<label>Fecha De Inicio Del Evento:</label>
+						<input type="date" name="FechaEinicio" id="FechaEinicio" class='form-control' required>
+					</div>				
+					<div class="col-md-6">
+						<label>Fecha De Finalización Del Evento:</label>
+						<input type="date" name="FechaEfinal" id="FechaEfinal" class='form-control' required>
+					</div><br><br><br><br>
+					<div class="col-md-6">
+						<label>Hora De Inicio Del Evento:</label>
+						<input type="time" name="HoraEinicio" id="HoraEinicio" class='form-control' required>
+					</div>
+					<div class="col-md-6">
+						<label>Hora De Finalización Del Evento:</label>
+						<input type="time" name="HoraEfinal" id="HoraEfinal" class='form-control' required>
+					</div><br><br><br><br>
+					<div class="col-md-6">
+						<label>Responsable Del Evento:</label>
+						<input type="text" name="ResponsableE" id="ResponsableE" class='form-control' maxlength="60" required >
+					</div>
+					<div class="col-md-6">
+						<label>¿Quién Organiza El Evento?:</label>
+						<input type="text" name="OrganizadoresE" id="OrganizadoresE" class='form-control' maxlength="255" required >
+					</div><br><br><br><br>
+					<div class="col-md-12">
+						<label>Descripción Del Evento:</label>
+						<textarea  name="DescripcionE" id="DescripcionE" class='form-control' maxlength="800" required></textarea>
+					</div>
+					
+					<div class="col-md-12 pull-right">
+					<hr>
+						<button type="submit" class="btn btn-success">Guardar Evento</button>
+					</div>
+			 </form>
 			</div>
         </div>
     </div>     

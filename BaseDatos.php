@@ -20,8 +20,8 @@
 			$return = mysqli_real_escape_string($this->con, $var);
 			return $return;
 		}
-		public function create($NombreE,$CuposE,$CostoEestudiante,$CostoEparticular,$FechaEinicio,$FechaEfinal,$HoraEinicio,$HoraEfinal,$ResponsableE,$OrganizadoresE,$DescripcionE){
-			$sql = "INSERT INTO `eventos` (NombreE, CuposE, CostoEestudiante, CostoEparticular, FechaEinicio, FechaEfinal, HoraEinicio, HoraEfinal, ResponsableE, OrganizadoresE, DescripcionE) VALUES ('$NombreE','$CuposE','$CostoEestudiante','$CostoEparticular','$FechaEinicio','$FechaEfinal','$HoraEinicio','$HoraEfinal','$ResponsableE','$OrganizadoresE','$DescripcionE')";
+		public function create($NombreE,$CuposE,$ImagenE,$UrlE,$CostoEestudiante,$CostoEparticular,$FechaEinicio,$FechaEfinal,$HoraEinicio,$HoraEfinal,$ResponsableE,$OrganizadoresE,$DescripcionE){
+			$sql = "INSERT INTO `eventos` (NombreE, CuposE, ImagenE, UrlE, CostoEestudiante, CostoEparticular, FechaEinicio, FechaEfinal, HoraEinicio, HoraEfinal, ResponsableE, OrganizadoresE, DescripcionE) VALUES ('$NombreE','$CuposE','$ImagenE','$UrlE','$CostoEestudiante','$CostoEparticular','$FechaEinicio','$FechaEfinal','$HoraEinicio','$HoraEfinal','$ResponsableE','$OrganizadoresE','$DescripcionE')";
 			$res = mysqli_query($this->con, $sql);
 			if($res){
 				return true;
@@ -41,8 +41,8 @@
 			$return = mysqli_fetch_object($res);
 			return $return;
 		}
-		public function update($NombreE,$CuposE,$CostoEestudiante,$CostoEparticular,$FechaEinicio,$FechaEfinal,$HoraEinicio,$HoraEfinal,$ResponsableE,$OrganizadoresE,$DescripcionE,$IdEvento){
-			$sql = "UPDATE eventos SET NombreE='$NombreE', CuposE='$CuposE',CostoEestudiante='$CostoEestudiante', CostoEparticular='$CostoEparticular', FechaEinicio='$FechaEinicio', FechaEfinal='$FechaEfinal', HoraEinicio='$HoraEinicio', HoraEfinal='$HoraEfinal', ResponsableE='$ResponsableE', OrganizadoresE='$OrganizadoresE', DescripcionE='$DescripcionE' WHERE IdEvento=$IdEvento";
+		public function update($NombreE,$CuposE,$ImagenE,$UrlE,$CostoEestudiante,$CostoEparticular,$FechaEinicio,$FechaEfinal,$HoraEinicio,$HoraEfinal,$ResponsableE,$OrganizadoresE,$DescripcionE,$IdEvento){
+			$sql = "UPDATE eventos SET NombreE='$NombreE', CuposE='$CuposE', ImagenE='$ImagenE', UrlE='$UrlE', CostoEestudiante='$CostoEestudiante', CostoEparticular='$CostoEparticular', FechaEinicio='$FechaEinicio', FechaEfinal='$FechaEfinal', HoraEinicio='$HoraEinicio', HoraEfinal='$HoraEfinal', ResponsableE='$ResponsableE', OrganizadoresE='$OrganizadoresE', DescripcionE='$DescripcionE' WHERE IdEvento=$IdEvento";
 			$res = mysqli_query($this->con, $sql);
 			if($res){
 				return true;

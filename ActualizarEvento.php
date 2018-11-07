@@ -38,6 +38,8 @@
 				if(isset($_POST) && !empty($_POST)){
 					$NombreE = $EventosU->sanitize($_POST['NombreE']);
 					$CuposE = $EventosU->sanitize($_POST['CuposE']);
+					$ImagenE = addslashes(file_get_contents($_FILES['ImagenE']['tmp_name']));
+					$UrlE = $EventosU->sanitize($_POST['UrlE']);
 					$CostoEestudiante = $EventosU->sanitize($_POST['CostoEestudiante']);
 					$CostoEparticular = $EventosU->sanitize($_POST['CostoEparticular']);
 					$FechaEinicio = $EventosU->sanitize($_POST['FechaEinicio']);
@@ -49,7 +51,7 @@
 					$DescripcionE = $EventosU->sanitize($_POST['DescripcionE']);
 					$IdEvento = intval($_GET['IdEvento']);
 					
-					$res = $EventosU->update($NombreE,$CuposE,$CostoEestudiante,$CostoEparticular,$FechaEinicio,$FechaEfinal,$HoraEinicio,$HoraEfinal,$ResponsableE,$OrganizadoresE,$DescripcionE,$IdEvento);
+					$res = $EventosU->update($NombreE,$CuposE,$ImagenE,$UrlE,$CostoEestudiante,$CostoEparticular,$FechaEinicio,$FechaEfinal,$HoraEinicio,$HoraEfinal,$ResponsableE,$OrganizadoresE,$DescripcionE,$IdEvento);
 					if($res){
 						$message= "Evento actualizado con éxito";
 						$class="alert alert-success";
@@ -66,7 +68,7 @@
 				$DatosEvento = $EventosU->single_record($IdEvento);
 			?>
 			<div class="row">
-				<form method="post">
+				<form method="POST" enctype="multipart/form-data">
 				<div class="col-md-6">
 					<label>Nombre Del Evento:</label>
 					<input type="text" name="NombreE" id="NombreE" class='form-control' maxlength="255" required value="<?php echo $DatosEvento->NombreE;?>">
@@ -74,6 +76,15 @@
 				<div class="col-md-6">
 					<label>Cupos Del Evento:</label>
 					<input type="number" name="CuposE" id="CuposE" class='form-control' required value="<?php echo $DatosEvento->CuposE;?>">
+				</div><br><br><br><br>
+				<div class="col-md-6">
+					<label>Inserte imagen del evento:</label>
+					<img height="50px" src="data:image/jpg;base64,<?php echo base64_encode($DatosEvento->ImagenE);?>">
+					<input type="file" name="ImagenE" id="ImagenE">
+				</div>
+				<div class="col-md-6">
+					<label>Inserte URL del evento:</label>
+					<input type="text" name="UrlE" id="UrlE" class='form-control' value="<?php echo $DatosEvento->UrlE;?>">
 				</div><br><br><br><br>
 				<div class="col-md-6">
 					<label>Costo Para Estudiantes:</label>

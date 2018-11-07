@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-sm-8"><h2>Listado de  <b>Eventos</b></h2></div>
                     <div class="col-sm-4">
-                        <a href="CrearEventos.php" class="btn btn-info add-new"><i class="fa fa-plus"></i> Agregar Eventos</a>
+                        <a href="CrearEventos.php" class="btn btn-info add-new"><i class="fa fa-plus"></i>Agregar Eventos</a>
                     </div>
                 </div>
             </div>
@@ -29,6 +29,8 @@
                         <th>ID Evento</th>
                         <th>Nombre Evento</th>
                         <th>Cupos</th> 
+                        <th>Imagen</th> 
+                        <th>URL</th> 
                         <th>Costo Estudiantes</th>
 						<th>Costo Particulares</th>
                         <th>Fecha Inicio</th>
@@ -54,6 +56,8 @@
                         $IdEvento = $row->IdEvento;
                         $NombreE = $row->NombreE;
                         $CuposE = $row->CuposE;
+                        $ImagenE = $row->ImagenE;
+                        $UrlE = $row->UrlE;
                         $CostoEestudiante = $row->CostoEestudiante;
                         $CostoEparticular = $row->CostoEparticular;
                         $FechaEinicio = $row->FechaEinicio;
@@ -69,6 +73,20 @@
                         <td><?php echo $IdEvento;?></td>
                         <td><?php echo $NombreE;?></td>
                         <td><?php echo $CuposE;?></td>
+                        <?php
+                            if(!empty(base64_encode($ImagenE))){ ?>
+                                <td><img height="50px" width="70px" src="data:image/jpg;base64,<?php echo base64_encode($ImagenE);?>"></td>
+                            <?php }else{ ?>
+                                <td><?php echo "Sin Imagen";?></td>
+                            <?php }
+                        ?>
+                        <?php
+                            if(!empty($UrlE)){ ?>
+                                <td><a href="<?php echo $UrlE;?>" class="url" title="url" data-toggle="tooltip"><i class="material-icons">language</i></a></td>
+                            <?php }else{ ?>
+                                <td><?php echo "Sin Enlace";?></td>
+                            <?php }
+                        ?>
                         <td><?php echo $CostoEestudiante;?></td>
                         <td><?php echo $CostoEparticular;?></td>
                         <td><?php echo $FechaEinicio;?></td>

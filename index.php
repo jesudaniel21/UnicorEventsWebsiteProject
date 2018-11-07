@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang=E254;<head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,6 +21,12 @@
 				<a href="ListarEventos.php">Ver Eventos</a>
 				<a href="#">Contactenos</a>
 			</ul>
+		</section><br>
+		<section class="search" id="search">
+			<fieldset>
+				<input type="search" name="buscador" placeholder="Buscar Evento...">
+				<button id="search" type="submit"><i class="material-icons" id="buscar">search</i></button>
+			</fieldset>
 		</section>
 	</header>
     
